@@ -8,12 +8,12 @@ import CardContent from '@material-ui/core/CardContent';
 
 // import { Mutation } from 'react-apollo';
 import { connect } from 'react-redux';
-
+import { FETCH_TRANSACTIONS } from '../actions';
 import { GET_TRANSACTIONS } from '../queries';
 
 // Redux Connected Component
 
-const TransactionsList = ({ transactions }) => (
+const TransactionsList = () => (
   <Grid container>
     <Grid item>
       <Typography variant="h2">Transactions</Typography>
@@ -49,38 +49,12 @@ TransactionsList.propTypes = {
   ),
 };
 
-const mapStateToProps = (state) => ({
-  transactions: state.transactions,
+const mapDispatchToProps = (dispatch) => ({
+  fetchTransactions: () => dispatch(FETCH_TRANSACTIONS),
 });
 
-export default connect(mapStateToProps)(TransactionsList);
+const mapStateToProps = (state) => ({
+  // transactions: state.transactions,
+});
 
-// Redux Connected Component
-
-// const Select = ({ isSelected, toggleSelectRepository }) => (
-//   <button type="button" onClick={toggleSelectRepository}>
-//     {isSelected ? 'Unselect' : 'Select'}
-//   </button>
-// );
-
-// const mapDispatchToProps = (dispatch, { id, isSelected }) => ({
-//   toggleSelectRepository: () => dispatch({
-//     type: 'TOGGLE_SELECT_REPOSITORY',
-//     id,
-//     isSelected,
-//   }),
-// });
-
-// const SelectContainer = connect(null, mapDispatchToProps)(Select);
-
-// // Apollo "Connected" Component
-
-// const Star = ({ id }) => (
-//   <Mutation mutation={STAR_REPOSITORY} variables={{ id }}>
-//     {(starRepository) => (
-//       <button type="button" onClick={starRepository}>
-//         Star
-//       </button>
-//     )}
-//   </Mutation>
-// );
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionsList);
