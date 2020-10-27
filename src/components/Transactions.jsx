@@ -1,64 +1,86 @@
-import { Mutation } from 'react-apollo';
+import React from 'react';
+import { Query } from 'react-apollo';
+import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
+import CardContent from '@material-ui/core/CardContent';
+
+// import { Mutation } from 'react-apollo';
 import { connect } from 'react-redux';
 
+import { GET_TRANSACTIONS } from '../queries';
+
 // Redux Connected Component
 
-export const RepositoryList = ({ repositories, selectedRepositoryIds }) => (
-  <ul>
-    {repositories.edges.map(({ node }) => {
-      const isSelected = selectedRepositoryIds.includes(node.id);
+const TransactionsList = ({ transactions }) => (
+  <Grid container>
+    <Grid item>
+      <Typography variant="h2">Transactions</Typography>
+      <Query query={GET_TRANSACTIONS}>
+        {({ data: { transactions }, loading }) => {
+          if (loading || !transactions) {
+            return <div>Loading ...</div>;
+          }
 
-      const rowClassName = ['row'];
-
-      if (isSelected) {
-        rowClassName.push('row_selected');
-      }
-
-      return (
-        <li className={rowClassName.join(' ')} key={node.id}>
-          <SelectContainer id={node.id} isSelected={isSelected} />
-          {' '}
-          <a href={node.url}>{node.name}</a>
-          {' '}
-          {!node.viewerHasStarred && <Star id={node.id} />}
-        </li>
-      );
-    })}
-  </ul>
+          return (
+            transactions.map(({ id, payee, amount }) => (
+              <Card key={id}>
+                <CardContent>
+                  <p>{payee}</p>
+                  <p>{amount}</p>
+                </CardContent>
+              </Card>
+            ))
+          );
+        }}
+      </Query>
+    </Grid>
+  </Grid>
 );
+
+TransactionsList.propTypes = {
+  transactions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      payee: PropTypes.string,
+      amount: PropTypes.number,
+    }).isRequired,
+  ),
+};
 
 const mapStateToProps = (state) => ({
-  selectedRepositoryIds: state.selectedRepositoryIds,
+  transactions: state.transactions,
 });
 
-const Repositories = connect(mapStateToProps)(RepositoryList);
+export default connect(mapStateToProps)(TransactionsList);
 
 // Redux Connected Component
 
-const Select = ({ isSelected, toggleSelectRepository }) => (
-  <button type="button" onClick={toggleSelectRepository}>
-    {isSelected ? 'Unselect' : 'Select'}
-  </button>
-);
+// const Select = ({ isSelected, toggleSelectRepository }) => (
+//   <button type="button" onClick={toggleSelectRepository}>
+//     {isSelected ? 'Unselect' : 'Select'}
+//   </button>
+// );
 
-const mapDispatchToProps = (dispatch, { id, isSelected }) => ({
-  toggleSelectRepository: () => dispatch({
-    type: 'TOGGLE_SELECT_REPOSITORY',
-    id,
-    isSelected,
-  }),
-});
+// const mapDispatchToProps = (dispatch, { id, isSelected }) => ({
+//   toggleSelectRepository: () => dispatch({
+//     type: 'TOGGLE_SELECT_REPOSITORY',
+//     id,
+//     isSelected,
+//   }),
+// });
 
-const SelectContainer = connect(null, mapDispatchToProps)(Select);
+// const SelectContainer = connect(null, mapDispatchToProps)(Select);
 
-// Apollo "Connected" Component
+// // Apollo "Connected" Component
 
-const Star = ({ id }) => (
-  <Mutation mutation={STAR_REPOSITORY} variables={{ id }}>
-    {(starRepository) => (
-      <button type="button" onClick={starRepository}>
-        Star
-      </button>
-    )}
-  </Mutation>
-);
+// const Star = ({ id }) => (
+//   <Mutation mutation={STAR_REPOSITORY} variables={{ id }}>
+//     {(starRepository) => (
+//       <button type="button" onClick={starRepository}>
+//         Star
+//       </button>
+//     )}
+//   </Mutation>
+// );
