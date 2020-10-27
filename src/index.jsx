@@ -17,15 +17,13 @@ import registerServiceWorker from './registerServiceWorker';
 
 const cache = new InMemoryCache();
 
-const GITHUB_BASE_URL = 'https://api.github.com/graphql';
-
 const httpLink = new HttpLink({
-  uri: GITHUB_BASE_URL,
-  headers: {
-    authorization: `Bearer ${
-      process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN
-    }`,
-  },
+  uri: process.env.REACT_APP_API_URL,
+  // headers: {
+  //   authorization: `Bearer ${
+  //     process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN
+  //   }`,
+  // },
 });
 
 const client = new ApolloClient({
@@ -53,7 +51,7 @@ function applyToggleSelectRepository(state, action) {
   const { id, isSelected } = action;
 
   const selectedRepositoryIds = isSelected
-    ? state.selectedRepositoryIds.filter(itemId => itemId !== id)
+    ? state.selectedRepositoryIds.filter((itemId) => itemId !== id)
     : state.selectedRepositoryIds.concat(id);
 
   return { ...state, selectedRepositoryIds };
