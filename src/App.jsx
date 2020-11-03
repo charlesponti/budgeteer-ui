@@ -2,7 +2,7 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import { useAuth0 } from '@auth0/auth0-react';
-import Transactions from './components/Transactions';
+import Transactions from './views/Transactions';
 
 // Apollo "Connected" Component
 
