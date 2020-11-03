@@ -1,6 +1,6 @@
 import React from 'react';
 import { Query } from 'react-apollo';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
@@ -15,7 +15,7 @@ import { GET_TRANSACTIONS } from '../queries';
 
 const TransactionsList = () => (
   <Grid container>
-    <Grid item>
+    <Grid item xs={12}>
       <Typography variant="h2">Transactions</Typography>
       <Query query={GET_TRANSACTIONS}>
         {({ data: { transactions }, loading }) => {
@@ -27,8 +27,14 @@ const TransactionsList = () => (
             transactions.map(({ id, payee, amount }) => (
               <Card key={id}>
                 <CardContent>
-                  <p>{payee}</p>
-                  <p>{amount}</p>
+                  <Grid container>
+                    <Grid item xs={6}>
+                      {payee}
+                    </Grid>
+                    <Grid item xs={6}>
+                      {amount}
+                    </Grid>
+                  </Grid>
                 </CardContent>
               </Card>
             ))
@@ -39,22 +45,10 @@ const TransactionsList = () => (
   </Grid>
 );
 
-TransactionsList.propTypes = {
-  transactions: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      payee: PropTypes.string,
-      amount: PropTypes.number,
-    }).isRequired,
-  ),
-};
-
 const mapDispatchToProps = (dispatch) => ({
   fetchTransactions: () => dispatch(FETCH_TRANSACTIONS),
 });
 
-const mapStateToProps = (state) => ({
-  // transactions: state.transactions,
-});
+const mapStateToProps = () => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionsList);
