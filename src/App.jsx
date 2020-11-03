@@ -8,7 +8,6 @@ import Transactions from './components/Transactions';
 
 import Loading from './components/Loading';
 import NavBar from './components/NavBar';
-import Footer from './components/Footer';
 import Home from './views/Home';
 import Profile from './views/Profile';
 import history from './utils/history';
@@ -49,7 +48,6 @@ const App = () => {
             <Route path="/profile" component={Profile} />
           </Switch>
         </Container>
-        <Footer />
       </div>
     </Router>
   );
