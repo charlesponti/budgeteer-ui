@@ -1,6 +1,6 @@
 import React from 'react';
 import { Query } from 'react-apollo';
-// import PropTypes from 'prop-types';
+import { withAuthenticationRequired } from '@auth0/auth0-react';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
@@ -10,8 +10,6 @@ import CardContent from '@material-ui/core/CardContent';
 import { connect } from 'react-redux';
 import { FETCH_TRANSACTIONS } from '../actions';
 import { GET_TRANSACTIONS } from '../queries';
-
-// Redux Connected Component
 
 const TransactionsList = () => (
   <Grid container>
@@ -51,4 +49,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = () => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(TransactionsList);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withAuthenticationRequired(TransactionsList),
+);
