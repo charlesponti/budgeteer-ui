@@ -2,8 +2,8 @@ import gql from 'graphql-tag';
 
 export const GET_TRANSACTIONS = gql`
   {
-    transactions {
-        id
+    getTransactions {
+        _id
         payee
         amount
         account {
