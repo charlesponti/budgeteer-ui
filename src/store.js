@@ -4,13 +4,14 @@
 import { createStore } from 'redux';
 
 const initialState = {
+  isLoading: false,
   selectedRepositoryIds: [],
 };
 
 function reducer(state, action) {
   switch (action.type) {
     case 'FETCH_TRANSACTIONS': {
-      return { ...state, loading: true };
+      return { ...state, isLoading: true };
     }
     case 'FETCH_TRANSACTIONS_SUCCESS': {
       return { ...state, transactions: action.payload };

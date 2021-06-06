@@ -1,26 +1,41 @@
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { Query } from 'react-apollo';
-// import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
-import CardContent from '@material-ui/core/CardContent';
+import styled from 'styled-components';
+import { GET_TRANSACTIONS } from '../services/graphql/queries';
 
-// import { Mutation } from 'react-apollo';
-import { connect } from 'react-redux';
-import { FETCH_TRANSACTIONS } from '../actions';
-import { GET_TRANSACTIONS } from '../queries';
+const FeedbackBlock = styled.div`
+  background-color: ${(props) => props.theme.colors.grey};
+  border-radius: 10px;
+  border: 1px solid grey;
+  padding: 16px;
+  font-size: 1.3rem;
+  font-weight: 500;
+`;
 
-// Redux Connected Component
+const Header = styled(Typography).attrs({ variant: 'h2' })`
+  margin-bottom: 16px
+`;
 
 const TransactionsList = () => (
   <Grid container>
     <Grid item xs={12}>
-      <Typography variant="h2">Transactions</Typography>
+      <Header>Transactions</Header>
       <Query query={GET_TRANSACTIONS}>
-        {({ data: { transactions }, loading }) => {
+        {({ data: { getTransactions: transactions }, loading }) => {
           if (loading || !transactions) {
             return <div>Loading ...</div>;
+          }
+
+          if (transactions.length === 0) {
+            return (
+              <FeedbackBlock>
+                No transactions
+              </FeedbackBlock>
+            );
           }
 
           return (
@@ -45,10 +60,4 @@ const TransactionsList = () => (
   </Grid>
 );
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchTransactions: () => dispatch(FETCH_TRANSACTIONS),
-});
-
-const mapStateToProps = () => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TransactionsList);
+export default TransactionsList;
