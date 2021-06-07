@@ -5,9 +5,9 @@ const categories = [
   { name: 'food', percentage: 0.1 },
   { name: 'transportation', percentage: 0.1 },
   { name: 'misc', percentage: 0.1 },
-  { name: 'utilities', percentage: 0.05 }
-]
+  { name: 'utilities', percentage: 0.05 },
+];
 
 export default {
-  categories
-}
+  categories,
+};

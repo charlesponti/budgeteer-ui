@@ -1,8 +1,8 @@
-import { Mutation } from 'react-apollo';
 import React from 'react';
-import { CREATE_TRANSACTION } from '../mutations';
+import { Mutation } from 'react-apollo';
+import { CREATE_TRANSACTION } from '../../services/graphql/mutations';
 
-const TransactionForm = ({ id }) => {
+const TransactionForm = () => {
   const person = '1';
   const account = '1';
 

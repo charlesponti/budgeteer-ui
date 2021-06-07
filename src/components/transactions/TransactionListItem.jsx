@@ -3,10 +3,10 @@ import moment from 'moment';
 import numberFormat from 'number-format.js';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import propTypes from '../../utils/propTypes';
+import propTypes from '../../services/utils/propTypes';
 import styles from './TransactionListItem.module.scss';
 
-const TransactionListItem = ({ transaction }: { transaction: any }) => {
+const TransactionListItem = ({ transaction }) => {
   if (!transaction) return null;
   const {
     payee, amount, date, category, account,
@@ -39,7 +39,7 @@ const TransactionListItem = ({ transaction }: { transaction: any }) => {
 };
 
 TransactionListItem.propTypes = {
-  transaction: propTypes.transactionPropType,
+  transaction: propTypes.transactionPropType.isRequired,
 };
 
 export default TransactionListItem;

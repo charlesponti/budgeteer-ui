@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import TransactionListItem from './TransactionListItem';
-import propTypes from '../../utils/propTypes';
+import propTypes from '../../services/utils/propTypes';
 import List from '../List';
 
-const TransactionList = ({ transactions }: { transactions: any }) => (
+const TransactionList = ({ transactions }) => (
   <List>
-    {transactions.map((transaction: any) => (
+    {transactions.map((transaction) => (
       <TransactionListItem
-        key={transaction._id}
+        key={transaction._id} // eslint-disable-line
         transaction={transaction}
       />
     ))}
