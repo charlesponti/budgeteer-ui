@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import { Helmet } from 'react-helmet'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
@@ -13,7 +13,7 @@ import InputLabel from '@material-ui/core//InputLabel'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 
-import categories from '../../lib/categories'
+import categories from '../../lib/categories';
 import Layout from '../../components/layout'
 import BudgetTable from '../../components/BudgetTable'
 
@@ -28,7 +28,7 @@ export default function Budget () {
   const { register, handleSubmit, setValue } = useForm()
 
   useEffect(() => {
-    register({ name: 'filing_type' }) // Register Material UI Select field
+    register('filing_type') // Register Material UI Select field
     setValue('filing_type', filing_type) // Set default value
   }, [register])
 
@@ -46,9 +46,9 @@ export default function Budget () {
 
   return (
     <Layout home={false}>
-      <Head>
+      <Helmet>
         <title> Budget </title>
-      </Head>
+      </Helmet>
 
       <h2 className={styles.header}> Budget </h2>
 

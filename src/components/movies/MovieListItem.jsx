@@ -1,42 +1,39 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Typography from '@material-ui/core/Typography';
+import MovieService from '../../services/movies';
+import MovieCard from './MovieCard';
+import styles from './MovieListItem.module.scss';
 
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import Typography from '@material-ui/core/Typography'
-
-import MovieCard from './MovieCard'
-import MovieService from '../../lib/movies.service'
-
-import cx from 'classnames'
-import styles from './MovieListItem.module.scss'
-
-export default function MovieListItem ({ movie }) {
-  if (!movie) return null
-
-  const [info, setInfo] = useState()
-  const [loading, setLoading] = useState(false)
+export default function MovieListItem({ movie }) {
+  const [info, setInfo] = useState();
+  const [loading, setLoading] = useState(false);
 
   /**
    * Handle click event on element
    * @param {SyntheticEvent} event
    */
-  function onClick () {
-    MovieService.searchById(movie.imdbID).then(response => {
+  function onClick() {
+    MovieService.searchById(movie.imdbID).then((response) => {
       // Delay response to reduce page jitter
       setTimeout(() => {
-        setInfo(response)
-        setLoading(false)
-      }, 500)
-    })
+        setInfo(response);
+        setLoading(false);
+      }, 500);
+    });
 
-    setLoading(true)
+    setLoading(true);
   }
 
-  function onCloseButtonClick () {
-    setInfo(null)
+  function onCloseButtonClick() {
+    setInfo(null);
   }
+
+  if (!movie) return null;
 
   return (
     <li>
@@ -65,8 +62,12 @@ export default function MovieListItem ({ movie }) {
       {loading ? <LinearProgress /> : null}
       {info ? <MovieCard movie={info} /> : null}
     </li>
-  )
+  );
 }
+
+MovieListItem.defaultProps = {
+  movie: {},
+};
 
 MovieListItem.propTypes = {
   movie: PropTypes.shape({
@@ -76,6 +77,6 @@ MovieListItem.propTypes = {
     Plot: PropTypes.string,
     imdbID: PropTypes.string,
     imdbRating: PropTypes.string,
-    imdbVotes: PropTypes.string
-  })
-}
+    imdbVotes: PropTypes.string,
+  }),
+};
