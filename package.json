@@ -23,6 +23,7 @@
     "graphql-tag": "^2.12.4",
     "highlight.js": "^11.0.1",
     "history": "^5.0.0",
+    "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
     "number-format.js": "^2.0.9",
     "prop-types": "^15.7.2",
@@ -63,6 +64,7 @@
   ],
   "devDependencies": {
     "@types/react-helmet": "^6.1.1",
+    "@types/react-router-dom": "^5.1.7",
     "eslint": "^7.28.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.23.4",

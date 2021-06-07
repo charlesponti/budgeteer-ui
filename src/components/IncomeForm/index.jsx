@@ -1,25 +1,24 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { useForm } from 'react-hook-form'
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import Form from 'components/Form';
+import FormGroup from 'components/FormGroup';
+import styles from './IncomeForm.module.scss';
 
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import FormControl from '@material-ui/core/FormControl'
+function IncomeForm({ onSubmit }) {
+  const { register, handleSubmit, reset } = useForm();
 
-import styles from './IncomeForm.module.scss'
-import utilStyles from '../../styles/utils.module.scss'
-
-function IncomeForm ({ onSubmit }: { onSubmit: Function }) {
-  const { register, handleSubmit, reset } = useForm()
-
-  function onFormSubmit ({ name, amount }: any) {
+  function onFormSubmit({ name, amount }) {
     onSubmit({
       name,
-      amount: parseFloat(amount)
-    })
+      amount: parseFloat(amount),
+    });
 
     // Reset form values
-    reset()
+    reset();
   }
 
   return (
@@ -50,11 +49,11 @@ function IncomeForm ({ onSubmit }: { onSubmit: Function }) {
         </FormControl>
       </form>
     </div>
-  )
+  );
 }
 
 IncomeForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-}
+  onSubmit: PropTypes.func.isRequired,
+};
 
-export default IncomeForm
+export default IncomeForm;

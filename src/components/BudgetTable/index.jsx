@@ -1,44 +1,34 @@
-import numberFormat from 'number-format.js'
+import numberFormat from 'number-format.js';
 import React from 'react';
-import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-
-interface Category {
-  percentage: number;
-  name: string;
-}
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 const useStyles = makeStyles({
   table: {
-    maxWidth: 650
+    maxWidth: 650,
   },
   tableContainer: {
-    background: 'none'
+    background: 'none',
   },
   tableCell: {
-    color: 'white'
+    color: 'white',
   },
   tableRow: {
     '& td, th': {
-      color: 'white'
-    }
-  }
-})
+      color: 'white',
+    },
+  },
+});
 
-BudgetTable.propTypes = {
-  income: PropTypes.number.isRequired,
-  categories: PropTypes.array.isRequired
-}
-
-export default function BudgetTable ({ categories, income }: { categories: Category[], income: number }) {
-  const classes = useStyles()
+const BudgetTable = ({ categories, income }) => {
+  const classes = useStyles();
 
   return (
     <TableContainer component={Paper} className={classes.tableContainer}>
@@ -53,21 +43,30 @@ export default function BudgetTable ({ categories, income }: { categories: Categ
         </TableHead>
         <TableBody>
           {categories.map(({ percentage, name }) => {
-            const recommended = numberFormat('$ ##,###.##', income * percentage)
-            const recommendedMonthly = numberFormat('$ ##,###.##', income * percentage / 12)
+            const recommended = numberFormat('$ ##,###.##', income * percentage);
+            const recommendedMonthly = numberFormat('$ ##,###.##', (income * percentage) / 12);
 
             return (
               <TableRow key={name} className={classes.tableRow}>
                 <TableCell component="th" scope="row" align="right">{name}</TableCell>
-                <TableCell align="right">{percentage * 100}%</TableCell>
+                <TableCell align="right">
+                  {percentage * 100}
+                  %
+                </TableCell>
                 <TableCell align="right">{recommended}</TableCell>
                 <TableCell align="right">{recommendedMonthly}</TableCell>
               </TableRow>
-            )
-          })
-          }
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>
-  )
-}
+  );
+};
+
+BudgetTable.propTypes = {
+  income: PropTypes.number.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+};
+
+export default BudgetTable;
