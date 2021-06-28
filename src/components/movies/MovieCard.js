@@ -1,14 +1,14 @@
-import React from 'react'
-import styled from 'styled-components'
-import PropTypes from 'prop-types'
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 
 const MovieInfo = styled.div`
   transition: height 800ms ease-in-out;
   overflow: auto;
   padding: 1rem;
-`
+`;
 
 const MoviePoster = styled.div`
   text-align: center;
@@ -16,17 +16,17 @@ const MoviePoster = styled.div`
   img {
     width: 50%;
   }
-`
+`;
 
 const MoviePlot = styled.div`
   margin-top: 1rem !important;
-`
+`;
 
 const MovieDetailsItem = styled.div`
   margin-top: 1rem !important;
-`
+`;
 
-export default function MovieCard ({ movie }) {
+export default function MovieCard({ movie }) {
   return movie ? (
     <MovieInfo>
       <Grid container spacing={2}>
@@ -36,15 +36,21 @@ export default function MovieCard ({ movie }) {
         <Grid item xs={12} md={6}>
           <Typography component={MoviePlot}>{movie.Plot}</Typography>
           <Typography component={MovieDetailsItem}>
-            <b>Rating</b> {movie.imdbRating}{' '}
+            <b>Rating</b>
+            {' '}
+            {movie.imdbRating}
+            {' '}
           </Typography>
           <Typography component={MovieDetailsItem}>
-            <b>Votes</b> {movie.imdbVotes}{' '}
+            <b>Votes</b>
+            {' '}
+            {movie.imdbVotes}
+            {' '}
           </Typography>
         </Grid>
       </Grid>
     </MovieInfo>
-  ) : null
+  ) : null;
 }
 
 MovieCard.propTypes = {
@@ -53,6 +59,6 @@ MovieCard.propTypes = {
     Poster: PropTypes.string,
     Plot: PropTypes.string,
     imdbRating: PropTypes.string,
-    imdbVotes: PropTypes.string
-  })
-}
+    imdbVotes: PropTypes.string,
+  }),
+};

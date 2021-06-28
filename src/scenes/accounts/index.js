@@ -1,13 +1,13 @@
-import useSWR from 'swr'
-import request from 'graphql-request'
-import Head from 'next/head'
-import Link from 'next/link'
+import useSWR from 'swr';
+import request from 'graphql-request';
+import Head from 'next/head';
+import Link from 'next/link';
 
-import Layout from '../../components/layout'
+import Layout from '../../components/layout';
 
-import List from '../../components/List'
+import List from '../../components/List';
 
-export default function Accounts () {
+export default function Accounts() {
   const { data, error } = useSWR(
     `
       query {
@@ -16,11 +16,12 @@ export default function Accounts () {
           name
         }
       }
-    `
-    , (query) => request(process.env.NEXT_PUBLIC_SERVER_URL, query))
+    `,
+    (query) => request(process.env.NEXT_PUBLIC_SERVER_URL, query),
+  );
 
-  if (error) return <h5>Error!</h5>
-  if (!data) return null
+  if (error) return <h5>Error!</h5>;
+  if (!data) return null;
 
   return (
     <Layout>
@@ -44,5 +45,5 @@ export default function Accounts () {
         </List>
       </section>
     </Layout>
-  )
+  );
 }

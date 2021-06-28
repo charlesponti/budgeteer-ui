@@ -1,31 +1,31 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import TextField from '@material-ui/core/TextField'
-import FormControl from '@material-ui/core/FormControl'
-import FormGroup from '@material-ui/core/FormGroup'
-import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import Button from '@material-ui/core/Button';
 
-import styles from './TransactionForm.module.scss'
+import styles from './TransactionForm.module.scss';
 
-function ExpenseForm ({ onSubmit }) {
-  function handleSubmit (event) {
+function ExpenseForm({ onSubmit }) {
+  function handleSubmit(event) {
     const {
       target: {
-        elements: [payee, amount, description, date]
-      }
-    } = event
+        elements: [payee, amount, description, date],
+      },
+    } = event;
 
     onSubmit({
       payee: payee.value,
       description: description.value,
       amount: amount.value,
-      date: date.value
-    })
+      date: date.value,
+    });
   }
 
   return (
-    <FormControl className={styles.container} fullWidth={true}>
+    <FormControl className={styles.container} fullWidth>
       <form onSubmit={handleSubmit}>
         <FormGroup className={styles.formGroup}>
           <TextField
@@ -52,7 +52,7 @@ function ExpenseForm ({ onSubmit }) {
             defaultValue="2017-05-24"
             // className={classes.textField}
             InputLabelProps={{
-              shrink: true
+              shrink: true,
             }}
           />
         </FormGroup>
@@ -61,11 +61,11 @@ function ExpenseForm ({ onSubmit }) {
         </FormGroup>
       </form>
     </FormControl>
-  )
+  );
 }
 
 ExpenseForm.propTypes = {
-  onSubmit: PropTypes.func
-}
+  onSubmit: PropTypes.func,
+};
 
-export default ExpenseForm
+export default ExpenseForm;

@@ -2,11 +2,12 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    jest: true
+    jest: true,
   },
   extends: [
     'eslint:recommended',
-    'airbnb'
+    'react-app',
+    'airbnb',
   ],
   globals: {
     Atomics: 'readonly',
@@ -20,7 +21,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
-    'react'
+    'react',
   ],
   rules: {
   },

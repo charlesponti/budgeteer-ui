@@ -1,13 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import cx from 'classnames'
+import React from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 
-import TextField from '@material-ui/core/TextField'
+import TextField from '@material-ui/core/TextField';
 
-import styles from './MovieForm.module.scss'
-import { Button } from '@material-ui/core'
+import { Button } from '@material-ui/core';
+import styles from './MovieForm.module.scss';
 
-export default function MovieForm ({ onSubmit, query }) {
+export default function MovieForm({ onSubmit, query }) {
   return (
     <form onSubmit={onSubmit} className={cx(styles.form)}>
       <TextField
@@ -21,10 +21,10 @@ export default function MovieForm ({ onSubmit, query }) {
       />
       <Button color="primary" variant="outlined" type="submit"> Search </Button>
     </form>
-  )
+  );
 }
 
 MovieForm.propTypes = {
   onSubmit: PropTypes.func,
-  query: PropTypes.string
-}
+  query: PropTypes.string,
+};

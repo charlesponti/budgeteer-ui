@@ -1,0 +1,36 @@
+#!/bin/bash
+. "$(dirname "$0")/_/husky.sh"
+
+BRANCH=`git rev-parse --abbrev-ref HEAD`
+PR_PROTECTED_BRANCH="beta"
+
+if [[ "$BRANCH" = $PR_PROTECTED_BRANCH ]]
+then
+  echo "\n🚀 🚫 Cannot push directly to the $BRANCH branch."
+  echo "🚀 Please create a separate branch and make a PR to merge your branch in to the $BRANCH branch.\n"
+  exit 1
+fi
+
+PRODUCTION_BRANCH="master"
+
+if [[ "$BRANCH" = "$PRODUCTION_BRANCH" ]]
+then
+  # Allows us to read user input below, assigns stdin to keyboard
+  exec < /dev/tty
+  echo "\n🚀 ❗❗ WHOA, you are about to push to the '$PRODUCTION_BRANCH' production branch."
+  read -p "🚀 Pushing new commits will trigger a deployment. Are you sure? (y/n) " yn
+  
+  case $yn in
+    [Yy]* ) 
+    echo "\n🚀 Are you absolutely sure? This is going to the production environment."
+    read -p "🚀 Type '${PRODUCTION_BRANCH}' to push it: " typed_branch
+
+    if [[ "$typed_branch" = "$PRODUCTION_BRANCH" ]]
+    then
+      echo '🚀 Ok, pushing it...\n'
+      exit 0
+    fi
+  esac
+  echo "🚀 Push cancelled by user\n"
+  exit 1
+fi

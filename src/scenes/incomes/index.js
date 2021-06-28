@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import { List, ListItem, ListItemText } from '@material-ui/core'
+import React, { useState } from 'react';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 
-import styles from './Incomes.module.scss'
-import Layout from '../../components/layout'
-import IncomeForm from '../../components/IncomeForm'
+import styles from './Incomes.module.scss';
+import Layout from '../../components/layout';
+import IncomeForm from '../../components/IncomeForm';
 
-function Incomes () {
+function Incomes() {
   const [incomes, setIncomes] = useState([
-    { name: 'Salary', amount: 10000 }
-  ])
+    { name: 'Salary', amount: 10000 },
+  ]);
 
-  async function onSubmit (income) {
-    return setIncomes([...incomes, income])
+  async function onSubmit(income) {
+    return setIncomes([...incomes, income]);
   }
 
   return (
@@ -23,24 +23,24 @@ function Incomes () {
           <Typography variant="h3" className={styles.title}>Incomes</Typography>
         </Grid>
         <Grid item xs={8}>
-          <IncomeForm onSubmit={onSubmit}/>
+          <IncomeForm onSubmit={onSubmit} />
         </Grid>
         <Grid item xs={8}>
-          <List dense={true}>
+          <List dense>
             {incomes.map(({ name, amount }) => (
               <ListItem key={name} label={name}>
                 <ListItemText
                   primary={name}
                   primaryTypographyProps={{
                     style: {
-                      fontSize: '1.5rem'
-                    }
+                      fontSize: '1.5rem',
+                    },
                   }}
                   secondary={new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'USD' }).format(amount)}
                   secondaryTypographyProps={{
                     style: {
-                      color: 'green'
-                    }
+                      color: 'green',
+                    },
                   }}
                 />
               </ListItem>
@@ -49,7 +49,7 @@ function Incomes () {
         </Grid>
       </Grid>
     </Layout>
-  )
+  );
 }
 
-export default Incomes
+export default Incomes;
