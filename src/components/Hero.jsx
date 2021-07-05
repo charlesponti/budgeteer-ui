@@ -1,17 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
+import Emoji from './Emoji';
 
-import logo from '../assets/logo.svg';
+const Subtitle = styled.p`
+  font-style: italic;
+  font-size: 16px;
+`;
 
 const Hero = () => (
   <div className="text-center hero my-5">
-    <img className="mb-3 app-logo" src={logo} alt="React logo" width="120" />
-    <h1 className="mb-4">React.js Sample Project</h1>
+    <Emoji kind="rocket" size="big">🚀</Emoji>
+    <h1 className="mb-4">Hominem</h1>
 
-    <p className="lead">
-      All your personal data in a beautiful, intuitive home
-      {' '}
-      <span role="img" aria-label="rocket">🚀</span>
-    </p>
+    <Subtitle>
+      All Your Personal Data. Yours.
+    </Subtitle>
   </div>
 );
 

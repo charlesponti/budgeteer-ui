@@ -1,22 +1,19 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
-import { useAuth0 } from '@auth0/auth0-react';
-import Transactions from './views/Transactions';
-
-// Apollo "Connected" Component
-
+import Transactions from './scenes/Transactions';
 import Loading from './components/Loading';
 import NavBar from './components/NavBar';
-import Home from './views/Home';
-import Profile from './views/Profile';
-import history from './utils/history';
+import Home from './scenes/Home';
+import Profile from './scenes/Profile';
+import history from './services/utils/history';
 
 // styles
 import './App.css';
 
 // fontawesome
-import initFontAwesome from './utils/initFontAwesome';
+import initFontAwesome from './services/utils/initFontAwesome';
 
 initFontAwesome();
 

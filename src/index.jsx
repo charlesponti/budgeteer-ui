@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import { ApolloProvider } from 'react-apollo';
 import { ThemeProvider } from 'styled-components';
-import history from './utils/history';
+import history from './services/utils/history';
 import App from './App';
 import store from './store';
 
